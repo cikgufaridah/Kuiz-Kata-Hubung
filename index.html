@@ -279,10 +279,10 @@
   </main>
 
 <script>
-const PASSWORD = "207207";
-const TIME_LIMIT = 10;
-
-const questions = [
+cconst PASSWORD = "207207";
+cconst TIME_LIMIT = 10;
+cconst WEB_APP_URL = "https://script.google.com/macros/s/AKfycbziKfHLqlvKUJT0MErPpqPGaBvk7g_Hnqjj1DsDW4HaEdjuQ2u_0EfSRVjikWa83-gK2Q/exec";
+cconst questions = [
   {q:"Raisya bersarapan _______ memakai pakaian seragam sekolah.", a:["setelah"]},
   {q:"Saya hendak ke rumah Leena _______ terlupa alamatnya.", a:["tetapi"]},
   {q:"Rayyan mengambil bola itu _______ melontarnya jauh-jauh.", a:["lalu"]},
@@ -426,6 +426,15 @@ function endQuiz(){
   const scores = JSON.parse(localStorage.getItem("kataHubungScores") || "[]");
   scores.push(record);
   localStorage.setItem("kataHubungScores", JSON.stringify(scores));
+  fetch(WEB_APP_URL, {
+  method: "POST",
+  mode: "no-cors",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(record)
+     
+});
   document.getElementById("resultName").textContent = `Nama: ${name}`;
   document.getElementById("finalScore").textContent = `${score}/${questions.length}`;
   document.getElementById("resultMessage").textContent = percent >= 80 ? "Cemerlang! Teruskan usaha." : percent >= 50 ? "Baik. Cuba ulang kaji lagi." : "Jangan putus asa. Cuba sekali lagi.";
